@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">HappyDog - For Walkers</string>
+    <string name="app_simple_name">HappyDog</string>
+    <string name="app_sub_name">For Walkers</string>
+
+    <!-- Login Activity-->
+    <string name="email_placeholder">Enter your email</string>
+    <string name="password_placeholder">Enter your password</string>
+    <string name="login_button_text">Ingresar</string>
+    <string name="registration_text">¿No es usuario? <b><u>Regístrese aquí</u></b></string>
+</resources>

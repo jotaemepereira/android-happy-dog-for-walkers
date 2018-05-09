@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:layout_above="@+id/subTitle"
+        android:layout_marginTop="@dimen/medium_spacing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/app_simple_name"
+        android:textStyle="bold"
+        android:textSize="@dimen/xxxxlarge_text" />
+
+    <TextView
+        android:id="@+id/subTitle"
+        android:layout_above="@+id/inputsContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/large_spacing"
+        android:text="@string/app_sub_name"
+        android:textStyle="bold"
+        android:textSize="@dimen/medium_text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/inputsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/medium_spacing"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/emailInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email_placeholder"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/passwordInput"
+            android:layout_marginTop="@dimen/medium_spacing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password_placeholder"
+                android:inputType="textPassword"/>
+
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_below="@+id/inputsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/medium_spacing"
+        android:layout_marginLeft="@dimen/medium_spacing"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/white"
+        android:text="@string/login_button_text"/>
+
+    <TextView
+        android:id="@+id/registrationText"
+        android:layout_marginTop="@dimen/small_spacing"
+        android:layout_below="@+id/loginButton"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/medium_text"
+        android:text="@string/registration_text"/>
+
+    <Button
+        android:id="@+id/googlePlusButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/medium_spacing"
+        android:layout_marginLeft="@dimen/medium_spacing"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:background="@color/google_plus_red"
+        android:textColor="@color/white"
+        android:text="@string/login_button_text"/>
+
+
+
+</RelativeLayout>
