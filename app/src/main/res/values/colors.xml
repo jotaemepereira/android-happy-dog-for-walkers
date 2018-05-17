@@ -11,4 +11,6 @@
     <color name="white">#FFFFFF</color>
     <color name="google_plus_red">#d34836</color>
     <color name="red_error">#B24E45</color>
+    <color name="success_green">#80B26F</color>
+    <color name="default_message">#5C8BC0</color>
 </resources>

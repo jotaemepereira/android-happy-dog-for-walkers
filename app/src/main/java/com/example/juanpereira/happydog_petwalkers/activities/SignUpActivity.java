@@ -1,15 +1,18 @@
 package com.example.juanpereira.happydog_petwalkers.activities;
 
 import android.content.Intent;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
 import com.example.juanpereira.happydog_petwalkers.R;
 import com.example.juanpereira.happydog_petwalkers.models.BaseResponse;
 import com.example.juanpereira.happydog_petwalkers.models.LoginBody;
+import com.example.juanpereira.happydog_petwalkers.models.SignupBody;
 import com.example.juanpereira.happydog_petwalkers.networking.NetworkAdapter;
 import com.example.juanpereira.happydog_petwalkers.utils.SnackbarUtils;
 import com.example.juanpereira.happydog_petwalkers.utils.TextUtils;
@@ -22,19 +25,22 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
     @BindView(R.id.emailInput) TextInputLayout emailInput;
     @BindView(R.id.passwordInput) TextInputLayout passwordInput;
+    @BindView(R.id.nameInput) TextInputLayout nameInput;
     @BindView(R.id.progress) ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
 
         setupLoadingIndicator();
+        getSupportActionBar().setTitle("Sign up");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void setupLoadingIndicator() {
@@ -42,33 +48,40 @@ public class LoginActivity extends AppCompatActivity {
         progressBar.setIndeterminateDrawable(doubleBounce);
     }
 
-    @OnClick(R.id.loginButton)
-    public void onLoginAction() {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @OnClick(R.id.registerButton)
+    public void onSignUpAction() {
         if (areFieldsEmpty()) {
             SnackbarUtils.showErrorMessage("Fields cannot be empty", findViewById(android.R.id.content));
         } else if (!TextUtils.isValidEmail(getEmail())) {
             SnackbarUtils.showErrorMessage("Invalid email", findViewById(android.R.id.content));
         } else {
-            doLogin();
+            signUp();
         }
     }
 
-    @OnClick(R.id.registrationText)
-    public void onSignUpAction() {
-        startActivity(new Intent(this, SignUpActivity.class));
-    }
-
-    private void doLogin() {
+    private void signUp() {
         progressBar.setVisibility(View.VISIBLE);
-        Call<Void> call = NetworkAdapter.getNetworkService().login(createLoginBody());
+        Call<Void> call = NetworkAdapter.getNetworkService().signUp(createSignUpBody());
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 progressBar.setVisibility(View.GONE);
                 if (response.isSuccessful()) {
+                    SnackbarUtils.showSuccessMessage("Success", findViewById(android.R.id.content));
                     goToMainActivity();
                 } else {
-                    SnackbarUtils.showErrorMessage("Invalid credentials.", findViewById(android.R.id.content));
+                    SnackbarUtils.showErrorMessage("There was an error, please try again.", findViewById(android.R.id.content));
                 }
             }
 
@@ -84,16 +97,18 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(new Intent(this, MainActivity.class));
     }
 
-    private LoginBody createLoginBody() {
-        LoginBody loginBody = new LoginBody();
-        loginBody.setEmail(getEmail());
-        loginBody.setPassword(getPassword());
+    private SignupBody createSignUpBody() {
+        SignupBody signupBody = new SignupBody();
+        signupBody.setEmail(getEmail());
+        signupBody.setPassword(getPassword());
+        signupBody.setName(getName());
+        signupBody.setDogWalker(true);
 
-        return loginBody;
+        return signupBody;
     }
 
     private boolean areFieldsEmpty() {
-        return getEmail().isEmpty() || getPassword().isEmpty();
+        return getEmail().isEmpty() || getPassword().isEmpty() || getName().isEmpty();
     }
 
     private String getEmail() {
@@ -103,5 +118,8 @@ public class LoginActivity extends AppCompatActivity {
     private String getPassword() {
         return passwordInput.getEditText().getText().toString();
     }
-}
 
+    private String getName() {
+        return nameInput.getEditText().getText().toString();
+    }
+}
