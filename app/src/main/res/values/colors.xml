@@ -10,4 +10,5 @@
     <color name="divider">#BDBDBD</color>
     <color name="white">#FFFFFF</color>
     <color name="google_plus_red">#d34836</color>
+    <color name="red_error">#B24E45</color>
 </resources>

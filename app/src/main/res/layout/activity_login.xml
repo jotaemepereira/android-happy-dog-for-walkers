@@ -97,6 +97,7 @@
         android:layout_marginLeft="@dimen/medium_spacing"
         android:textAlignment="center"
         android:textAllCaps="true"
+        android:visibility="gone"
         android:background="@color/google_plus_red"
         android:textColor="@color/white"
         android:text="@string/login_button_text"/>

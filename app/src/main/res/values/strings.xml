@@ -6,6 +6,6 @@
     <!-- Login Activity-->
     <string name="email_placeholder">Enter your email</string>
     <string name="password_placeholder">Enter your password</string>
-    <string name="login_button_text">Ingresar</string>
-    <string name="registration_text">¿No es usuario? <b><u>Regístrese aquí</u></b></string>
+    <string name="login_button_text">Login</string>
+    <string name="registration_text">¿Not a user? <b><u>Sign-up here</u></b></string>
 </resources>
