@@ -1,5 +1,6 @@
 package com.example.juanpereira.happydog_petwalkers.ui.login;
 
+import com.example.juanpereira.happydog_petwalkers.models.DataManager;
 import com.example.juanpereira.happydog_petwalkers.models.LoginBody;
 import com.example.juanpereira.happydog_petwalkers.networking.NetworkService;
 import com.example.juanpereira.happydog_petwalkers.ui.base.BasePresenter;
@@ -9,6 +10,11 @@ import org.reactivestreams.Subscription;
 
 import javax.inject.Inject;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -17,12 +23,12 @@ import retrofit2.Response;
 public class LoginPresenter extends BasePresenter<LoginView> {
 
     private LoginView view;
-    private Subscription subscription;
-    private NetworkService service;
+    private Disposable disposable;
+    private DataManager dataManager;
 
     @Inject
-    public LoginPresenter(NetworkService service) {
-        this.service = service;
+    public LoginPresenter(DataManager dataManager) {
+        this.dataManager = dataManager;
     }
 
     @Override
@@ -36,7 +42,7 @@ public class LoginPresenter extends BasePresenter<LoginView> {
         super.detachView();
         view = null;
 
-        if (subscription != null) subscription.cancel();
+        if (disposable != null) disposable.dispose();
     }
 
     public void login(String email, String password) {
@@ -47,26 +53,29 @@ public class LoginPresenter extends BasePresenter<LoginView> {
         } else {
             view.showProgress(true);
             view.setLoginButtonEnabled(false);
-            service.login(createLoginBody(email, password)).enqueue(new Callback<Void>() {
-                @Override
-                public void onResponse(Call<Void> call, Response<Void> response) {
-                    view.showProgress(false);
-                    view.setLoginButtonEnabled(true);
+            disposable = dataManager.login(createLoginBody(email, password))
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Consumer<Response<Void>>() {
+                        @Override
+                        public void accept(Response<Void> voidResponse) throws Exception {
+                            view.showProgress(false);
+                            view.setLoginButtonEnabled(true);
 
-                    if (response.isSuccessful()) {
-                        view.onLoginSuccessful();
-                    } else {
-                        view.onLoginError("Invalid credentials");
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<Void> call, Throwable t) {
-                    view.showProgress(false);
-                    view.setLoginButtonEnabled(true);
-                    view.onLoginError("There was an error. Please try again.");
-                }
-            });
+                            if (voidResponse.isSuccessful()) {
+                                view.onLoginSuccessful();
+                            } else {
+                                view.onLoginError("Invalid credentials");
+                            }
+                        }
+                    }, new Consumer<Throwable>() {
+                        @Override
+                        public void accept(Throwable throwable) throws Exception {
+                            view.showProgress(false);
+                            view.setLoginButtonEnabled(true);
+                            view.onLoginError("There was an internal error. Please try again.");
+                        }
+                    });
         }
     }
 

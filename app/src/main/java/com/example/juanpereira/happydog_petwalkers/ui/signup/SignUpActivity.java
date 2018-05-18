@@ -70,25 +70,25 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void signUp() {
         progressBar.setVisibility(View.VISIBLE);
-        Call<Void> call = NetworkAdapter.getNetworkService().signUp(createSignUpBody());
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                progressBar.setVisibility(View.GONE);
-                if (response.isSuccessful()) {
-                    SnackbarUtils.showSuccessMessage("Success", findViewById(android.R.id.content));
-                    goToMainActivity();
-                } else {
-                    SnackbarUtils.showErrorMessage(getString(R.string.email_taken), findViewById(android.R.id.content));
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                progressBar.setVisibility(View.GONE);
-                SnackbarUtils.showErrorMessage(getString(R.string.generic_error), findViewById(android.R.id.content));
-            }
-        });
+//        Call<Void> call = NetworkAdapter.getNetworkService().signUp(createSignUpBody());
+//        call.enqueue(new Callback<Void>() {
+//            @Override
+//            public void onResponse(Call<Void> call, Response<Void> response) {
+//                progressBar.setVisibility(View.GONE);
+//                if (response.isSuccessful()) {
+//                    SnackbarUtils.showSuccessMessage("Success", findViewById(android.R.id.content));
+//                    goToMainActivity();
+//                } else {
+//                    SnackbarUtils.showErrorMessage(getString(R.string.email_taken), findViewById(android.R.id.content));
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Void> call, Throwable t) {
+//                progressBar.setVisibility(View.GONE);
+//                SnackbarUtils.showErrorMessage(getString(R.string.generic_error), findViewById(android.R.id.content));
+//            }
+//        });
     }
 
     private void goToMainActivity() {

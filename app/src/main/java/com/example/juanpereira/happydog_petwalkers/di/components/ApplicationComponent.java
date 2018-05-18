@@ -6,6 +6,7 @@ import android.content.Context;
 import com.example.juanpereira.happydog_petwalkers.HappyDogApplication;
 import com.example.juanpereira.happydog_petwalkers.di.ApplicationContext;
 import com.example.juanpereira.happydog_petwalkers.di.modules.ApplicationModule;
+import com.example.juanpereira.happydog_petwalkers.models.DataManager;
 import com.example.juanpereira.happydog_petwalkers.networking.NetworkService;
 
 import javax.inject.Singleton;
@@ -18,5 +19,5 @@ public interface ApplicationComponent {
 
     @ApplicationContext Context context();
     Application application();
-    NetworkService networkService();
+    DataManager dataManager();
 }
