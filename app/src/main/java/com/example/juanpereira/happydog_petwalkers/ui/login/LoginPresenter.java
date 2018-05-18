@@ -80,10 +80,6 @@ public class LoginPresenter extends BasePresenter<LoginView> {
     }
 
     private LoginBody createLoginBody(String email, String password) {
-        LoginBody loginBody = new LoginBody();
-        loginBody.setEmail(email);
-        loginBody.setPassword(password);
-
-        return loginBody;
+        return new LoginBody(email, password);
     }
 }
