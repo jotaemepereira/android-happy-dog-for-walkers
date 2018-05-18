@@ -7,7 +7,7 @@
     <string name="email_placeholder">Enter your email</string>
     <string name="password_placeholder">Enter your password</string>
     <string name="login_button_text">Login</string>
-    <string name="registration_text">¿Not a user? <b><u>Sign-up here</u></b></string>
+    <string name="registration_text">New user? <b><u>Sign-up here</u></b></string>
     
     <!--Sign-up Activity -->
     <string name="name_placeholder">Enter your name</string>
@@ -15,4 +15,11 @@
     <string name="birth_date_placeholder">Enter your birth date</string>
     <string name="phone_placeholder">Enter your phone</string>
     <string name="signup_button_text">Sign-up</string>
+
+    <!-- Errors -->
+    <string name="empty_fields">Fields cannot be empty</string>
+    <string name="invalid_email">Invalid email</string>
+    <string name="invalid_credentials">Invalid credentials</string>
+    <string name="generic_error">There was en error, please try again.</string>
+    <string name="email_taken">Email not available</string>
 </resources>

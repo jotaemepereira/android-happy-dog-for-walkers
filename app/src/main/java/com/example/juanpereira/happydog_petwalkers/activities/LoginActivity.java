@@ -45,9 +45,9 @@ public class LoginActivity extends AppCompatActivity {
     @OnClick(R.id.loginButton)
     public void onLoginAction() {
         if (areFieldsEmpty()) {
-            SnackbarUtils.showErrorMessage("Fields cannot be empty", findViewById(android.R.id.content));
+            SnackbarUtils.showErrorMessage(getString(R.string.empty_fields), findViewById(android.R.id.content));
         } else if (!TextUtils.isValidEmail(getEmail())) {
-            SnackbarUtils.showErrorMessage("Invalid email", findViewById(android.R.id.content));
+            SnackbarUtils.showErrorMessage(getString(R.string.invalid_email), findViewById(android.R.id.content));
         } else {
             doLogin();
         }
@@ -68,14 +68,14 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     goToMainActivity();
                 } else {
-                    SnackbarUtils.showErrorMessage("Invalid credentials.", findViewById(android.R.id.content));
+                    SnackbarUtils.showErrorMessage(getString(R.string.invalid_credentials), findViewById(android.R.id.content));
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
-                SnackbarUtils.showErrorMessage("There was en error, please try again.", findViewById(android.R.id.content));
+                SnackbarUtils.showErrorMessage(getString(R.string.generic_error), findViewById(android.R.id.content));
             }
         });
     }

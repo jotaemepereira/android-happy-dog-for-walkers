@@ -4,9 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".activities.LoginActivity">
+
+    <ImageView
+        android:layout_above="@+id/mainTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/logo"/>
 
     <TextView
+        android:id="@+id/mainTitle"
         android:layout_above="@+id/subTitle"
         android:layout_marginTop="@dimen/medium_spacing"
         android:layout_width="wrap_content"
