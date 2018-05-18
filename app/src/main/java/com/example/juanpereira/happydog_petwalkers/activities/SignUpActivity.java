@@ -51,7 +51,6 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
@@ -62,9 +61,9 @@ public class SignUpActivity extends AppCompatActivity {
     @OnClick(R.id.registerButton)
     public void onSignUpAction() {
         if (areFieldsEmpty()) {
-            SnackbarUtils.showErrorMessage("Fields cannot be empty", findViewById(android.R.id.content));
+            SnackbarUtils.showErrorMessage(getString(R.string.empty_fields), findViewById(android.R.id.content));
         } else if (!TextUtils.isValidEmail(getEmail())) {
-            SnackbarUtils.showErrorMessage("Invalid email", findViewById(android.R.id.content));
+            SnackbarUtils.showErrorMessage(getString(R.string.invalid_email), findViewById(android.R.id.content));
         } else {
             signUp();
         }
@@ -81,14 +80,14 @@ public class SignUpActivity extends AppCompatActivity {
                     SnackbarUtils.showSuccessMessage("Success", findViewById(android.R.id.content));
                     goToMainActivity();
                 } else {
-                    SnackbarUtils.showErrorMessage("There was an error, please try again.", findViewById(android.R.id.content));
+                    SnackbarUtils.showErrorMessage(getString(R.string.email_taken), findViewById(android.R.id.content));
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
-                SnackbarUtils.showErrorMessage("There was en error, please try again.", findViewById(android.R.id.content));
+                SnackbarUtils.showErrorMessage(getString(R.string.generic_error), findViewById(android.R.id.content));
             }
         });
     }
