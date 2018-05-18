@@ -1,6 +1,5 @@
 package com.example.juanpereira.happydog_petwalkers.networking;
 
-import com.example.juanpereira.happydog_petwalkers.models.BaseResponse;
 import com.example.juanpereira.happydog_petwalkers.models.LoginBody;
 import com.example.juanpereira.happydog_petwalkers.models.SignupBody;
 
