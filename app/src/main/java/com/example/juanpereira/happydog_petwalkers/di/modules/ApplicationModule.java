@@ -23,7 +23,7 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    NetworkService provideNetworkService() {
+    public NetworkService provideNetworkService() {
         return NetworkAdapter.getNetworkService();
     }
 
